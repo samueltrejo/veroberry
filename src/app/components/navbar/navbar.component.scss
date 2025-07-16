@@ -1,0 +1,86 @@
+@use '../../styles/container';
+@use '../../styles/variables';
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: variables.$font-size-base;
+  font-family: variables.$font-primary;
+  position: relative;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-family: 'Playfair Display', serif;
+  font-size: variables.$font-size-logo;
+  cursor: pointer;
+
+  img {
+    height: 32px;
+    margin: -24px;
+  }
+
+  div {
+    margin-left: 2rem;
+  }
+}
+
+// Hamburger toggle
+.menu-toggle {
+  background: none;
+  border: none;
+  font-size: variables.$font-size-menu-toggle;
+  cursor: pointer;
+  display: block;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+// Nav links
+.nav-links {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  right: 1rem;
+  background: variables.$bg-secondary;
+  border: variables.$card-border;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  z-index: 100;
+
+  a {
+    margin: 0.5rem 0;
+    text-decoration: none;
+    color: variables.$text-primary;
+    text-transform: lowercase;
+    transition: color 0.3s, transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      color: variables.$bg-button;
+      transform: translateY(-2px);
+    }
+  }
+
+  &.show {
+    display: flex;
+  }
+
+  @media (min-width: 768px) {
+    display: flex !important;
+    flex-direction: row;
+    position: static;
+    padding: 0;
+    border: none;
+    background: transparent;
+
+    a {
+      margin-left: 1.5rem;
+      margin-top: 0;
+    }
+  }
+}

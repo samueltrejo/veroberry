@@ -1,0 +1,126 @@
+/* Common */
+@use '../../styles/container';
+@use '../../styles/variables';
+
+.hero {
+  border-radius: 1rem;
+
+  h2 {
+    font-size: variables.$font-size-header-h1;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.cta-button {
+  background-color: transparent;
+  border: variables.$button-border;
+  color: variables.$bg-button;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: variables.$font-size-cta;
+  // font-family: 'Playfair Display', serif;
+  // font-weight: 500;
+  // letter-spacing: 0.05em;
+  text-transform: lowercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: variables.$bg-hover;
+    border-color: variables.$bg-button;
+    color: darken(variables.$bg-button, 25%);
+  }
+
+  &:focus-visible {
+    outline: 2px dashed variables.$bg-button;
+    outline-offset: 4px;
+  }
+}
+
+.card {
+  border-radius: 0.8rem;
+  // overflow: hidden;
+  // text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 0.75rem;
+  }
+
+  p {
+    font-size: variables.$font-size-small;
+  }
+
+  .card-body {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+
+.price {
+  font-size: variables.$font-size-small;
+  color: variables.$bg-button;
+  font-weight: bold;
+}
+
+.footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: variables.$font-size-cta;
+  color: variables.$text-muted;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.review-card {
+  background: variables.$bg-secondary;
+  border: variables.$card-border;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: variables.$shadow;
+  font-style: italic;
+  position: relative;
+  text-align: center;
+}
+
+.review-text {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 1.5rem;
+}
+
+.review-author {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: variables.$bg-button;
+}

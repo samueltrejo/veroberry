@@ -1,0 +1,54 @@
+@use '../../styles/variables';
+@use '../../styles/container';
+
+.product-container {
+  h2 {
+    font-size: variables.$font-size-header-h2;
+  }
+
+  .price {
+    font-size: variables.$font-size-base;
+    font-weight: bold;
+    color: variables.$bg-button;
+  }
+
+  .variants {
+    .color-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid #ccc;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &.selected {
+        border-color: variables.$bg-button;
+        box-shadow: 0 0 0 2px variables.$bg-button inset;
+      }
+
+      &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .review-form {
+    input, textarea, select {
+      font-size: variables.$font-size-small;
+    }
+  }
+
+  .review {
+    background-color: variables.$bg-secondary;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    box-shadow: variables.$shadow;
+  }
+
+  .author {
+    font-size: 0.85rem;
+    color: variables.$text-muted;
+    margin-top: 0.5rem;
+  }
+}

@@ -1,0 +1,57 @@
+@use '../../styles/variables';
+@use '../../styles/container';
+
+.search-container {
+  width: 100%;
+  // max-width: 800px;
+  // margin: 2rem auto;
+  // padding: 1rem;
+  background-color: variables.$bg-secondary;
+  border-radius: .5rem;
+  box-shadow: variables.$shadow;
+  transition: all 0.3s ease;
+
+  &.expanded {
+    .filters {
+      margin-top: 1rem;
+    }
+  }
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    font-size: variables.$font-size-base;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+  }
+
+  .icon-btn {
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    cursor: pointer;
+
+    .icon {
+      font-size: 1rem; // larger icon size
+      color: variables.$bg-button;
+      transition: transform 0.2s ease;
+    }
+
+    .caret {
+      transition: transform 0.3s ease;
+    }
+  }
+}
+
+.filters {
+  padding-top: 0.5rem;
+  border-top: 1px solid #eee;
+}

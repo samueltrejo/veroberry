@@ -1,0 +1,51 @@
+// Responsive breakpoints (Bootstrap-like)
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;
+
+// Base container styles
+.container {
+  width: 100%;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+
+  @media (min-width: $breakpoint-sm) {
+    max-width: 540px;
+  }
+
+  @media (min-width: $breakpoint-md) {
+    max-width: 720px;
+  }
+
+  @media (min-width: $breakpoint-lg) {
+    max-width: 960px;
+  }
+
+  // @media (min-width: $breakpoint-xl) {
+  //   max-width: 1140px;
+  // }
+
+  // @media (min-width: $breakpoint-xxl) {
+  //   max-width: 1320px;
+  // }
+}
+
+// Optional fluid container (100% always)
+.container-fluid {
+  width: 100%;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+// Optional utility: center with max-width for cards or modals
+.container-narrow {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}

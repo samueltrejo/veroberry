@@ -1,0 +1,87 @@
+// _spacing.scss
+
+// Breakpoints map
+$breakpoints: (
+  '': null,        // base (no media query)
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px
+);
+
+// Margin/Padding scale
+$spacing-scale: (
+  0: 0,
+  1: 0.25rem,
+  2: 0.5rem,
+  3: 1rem,
+  4: 1.5rem,
+  5: 3rem
+);
+
+// Sides map
+$sides: (
+  '': '',         // all sides
+  't': 'top',
+  'b': 'bottom',
+  's': 'left',
+  'e': 'right',
+  'x': ('left', 'right'),
+  'y': ('top', 'bottom')
+);
+
+// Base spacing classes (no media query)
+@each $property in ('m', 'p') {
+  @each $side-key, $side-value in $sides {
+    @each $scale-key, $scale-value in $spacing-scale {
+      .#{$property}#{$side-key}-#{$scale-key} {
+        @if type-of($side-value) == 'list' {
+          @each $s in $side-value {
+            #{if($property == 'm', margin-#{$s}, padding-#{$s})}: $scale-value;
+          }
+        } @else if $side-value == '' {
+          #{if($property == 'm', margin, padding)}: $scale-value;
+        } @else {
+          #{if($property == 'm', margin-#{$side-value}, padding-#{$side-value})}: $scale-value;
+        }
+      }
+    }
+  }
+}
+
+// Responsive spacing classes
+@each $breakpoint, $breakpoint-size in $breakpoints {
+  @if $breakpoint-size != null {
+    @media screen and (min-width: #{$breakpoint-size}) {
+      @each $property in ('m', 'p') {
+        @each $side-key, $side-value in $sides {
+          @each $scale-key, $scale-value in $spacing-scale {
+            .#{$property}#{$side-key}-#{$breakpoint}-#{$scale-key} {
+              @if type-of($side-value) == 'list' {
+                @each $s in $side-value {
+                  #{if($property == 'm', margin-#{$s}, padding-#{$s})}: $scale-value;
+                }
+              } @else if $side-value == '' {
+                #{if($property == 'm', margin, padding)}: $scale-value;
+              } @else {
+                #{if($property == 'm', margin-#{$side-value}, padding-#{$side-value})}: $scale-value;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Special auto margin classes
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.ms-auto {
+  margin-left: auto;
+}
+.me-auto {
+  margin-right: auto;
+}

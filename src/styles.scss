@@ -1,1 +1,48 @@
-/* You can add global styles to this file, and also import other style files */
+@use './app/styles/variables';
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  font-family: 'Inter', sans-serif;
+  background-color: #fff3f6;
+}
+
+p {
+  margin-bottom: 0rem;
+}
+
+a {
+  text-decoration: none;;
+}
+
+.app-btn {
+  background-color: transparent;
+  border: variables.$button-border;
+  color: variables.$bg-button;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: variables.$font-size-cta;
+  // font-family: 'Playfair Display', serif;
+  // font-weight: 500;
+  // letter-spacing: 0.05em;
+  text-transform: lowercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: variables.$bg-hover;
+    border-color: variables.$bg-button;
+    color: darken(variables.$bg-button, 25%);
+  }
+
+  &:focus-visible {
+    outline: 2px dashed variables.$bg-button;
+    outline-offset: 4px;
+  }
+}
