@@ -2,29 +2,29 @@
 @use '../../styles/variables';
 
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  // display: flex;
+  // justify-content: space-between;
+  // align-items: center;
   font-size: variables.$font-size-base;
   font-family: variables.$font-primary;
   position: relative;
 }
 
 .logo {
-  display: flex;
-  align-items: center;
+  // display: flex;
+  // align-items: center;
   font-family: 'Playfair Display', serif;
   font-size: variables.$font-size-logo;
   cursor: pointer;
 
-  img {
-    height: 32px;
-    margin: -24px;
-  }
+  // img {
+  //   height: 32px;
+  //   margin: -24px;
+  // }
 
-  div {
-    margin-left: 2rem;
-  }
+  // div {
+  //   margin-left: 2rem;
+  // }
 }
 
 // Hamburger toggle

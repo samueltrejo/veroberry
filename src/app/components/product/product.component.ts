@@ -16,16 +16,26 @@ import { NavbarComponent } from "../navbar/navbar.component";
       <div class="row">
         <div class="col-md-6">
           <!-- <img [src]="selectedVariant?.imageUrl || product.imageUrl" class="img-fluid rounded" /> -->
-          <img src="assets/placeholder.jpg" class="img-fluid rounded" />
+          <img src="assets/placeholder.jpg" class="img-fluid" />
         </div>
 
         <div class="col-md-6">
           <h2>{{ product.name }}</h2>
-          <p class="text-muted">{{ product.description }}</p>
+          
+          <div class="review-summary" *ngIf="averageRating">
+            <ng-container *ngFor="let star of stars">
+              <i [ngClass]="star" class="star-icon"></i>
+            </ng-container>
+            <span class="rating-text">
+              {{ averageRating }} ({{ reviews.length }} review{{ reviews.length === 1 ? '' : 's' }})
+            </span>
+          </div>
+          
+          <p class="text-muted mt-2">{{ product.description }}</p>
           <p class="price">\${{ product.price.toFixed(2) }}</p>
 
           <div class="variants mb-3">
-            <label class="mb-2 d-block">Select Color:</label>
+            <label class="my-2 d-block option-header">Choose color</label>
             <div class="d-flex gap-2">
               <button *ngFor="let variant of product.variants"
                       class="color-dot"
@@ -38,7 +48,17 @@ import { NavbarComponent } from "../navbar/navbar.component";
             </div>
           </div>
 
-          <button class="app-btn mt-3" (click)="addToCart()" [disabled]="!selectedVariant?.inStock">
+          <div class="variants mb-3">
+            <label class="my-2 d-block option-header">Quantity</label>
+            <div class="d-flex gap-2 align-items-center">
+              <button class="app-btn px-3" (click)="decreaseQty()" [disabled]="quantity <= 1">-</button>
+              <div class="app-btn text-center" style="width: 3rem;">{{ quantity }}</div>
+              <button class="app-btn px-3" (click)="increaseQty()">+</button>
+            </div>
+          </div>
+
+
+          <button class="app-btn" (click)="addToCart()" [disabled]="!selectedVariant?.inStock">
             Add to Cart
           </button>
         </div>
@@ -81,6 +101,9 @@ export class ProductComponent {
   product!: Product;
   selectedVariant: any;
   reviews: Review[] = [];
+  averageRating: number = 0;
+  stars: string[] = [];
+  quantity = 1;
 
   userReview: Partial<Review> = {
     userName: '',
@@ -88,6 +111,20 @@ export class ProductComponent {
     rating: 5
   };
 
+  // ngOnInit() {
+  //   const productId = this.route.snapshot.paramMap.get('id');
+  //   if (!productId) return;
+
+  //   const product = this.productService.getProductById(productId);
+  //   if (product) {
+  //     this.product = product;
+  //     this.selectedVariant = this.product.variants?.[0];
+  //     this.reviews = this.productService.getReviewsForProduct(this.product.id);
+  //   } else {
+  //     console.error('Product not found for ID:', productId);
+  //     // You could redirect or show an error message
+  //   }
+  // }
   ngOnInit() {
     const productId = this.route.snapshot.paramMap.get('id');
     if (!productId) return;
@@ -95,11 +132,27 @@ export class ProductComponent {
     const product = this.productService.getProductById(productId);
     if (product) {
       this.product = product;
-      this.selectedVariant = this.product.variants?.[0];
-      this.reviews = this.productService.getReviewsForProduct(this.product.id);
-    } else {
-      console.error('Product not found for ID:', productId);
-      // You could redirect or show an error message
+      this.selectedVariant = product.variants?.[0];
+      this.reviews = this.productService.getReviewsForProduct(product.id);
+      this.averageRating = this.productService.getAverageRating(product.id);
+      this.generateStarIcons(this.averageRating);
+    }
+  }
+
+  generateStarIcons(rating: number) {
+    this.stars = [];
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating - fullStars >= 0.25 && rating - fullStars <= 0.75;
+    const totalStars = hasHalfStar ? fullStars + 1 : fullStars;
+    
+    for (let i = 0; i < fullStars; i++) {
+      this.stars.push('bi bi-star-fill');
+    }
+    if (hasHalfStar) {
+      this.stars.push('bi bi-star-half');
+    }
+    for (let i = totalStars; i < 5; i++) {
+      this.stars.push('bi bi-star');
     }
   }
 
@@ -107,9 +160,17 @@ export class ProductComponent {
     this.selectedVariant = variant;
   }
 
+  increaseQty() {
+    this.quantity++;
+  }
+
+  decreaseQty() {
+    if (this.quantity > 1) this.quantity--;
+  }
+
   addToCart() {
-    console.log(`Added to cart:`, this.product.name, this.selectedVariant?.color);
-    // Add real cart logic here
+    console.log(`Added to cart: ${this.product.name} (${this.selectedVariant?.color}) x ${this.quantity}`);
+    // Add to cart logic here
   }
 
   submitReview() {
@@ -125,6 +186,7 @@ export class ProductComponent {
 
     this.reviews.unshift(newReview);
     this.userReview = { userName: '', comment: '', rating: 5 };
+    this.averageRating = this.productService.getAverageRating(this.product.id);
     console.log('Review submitted:', newReview);
   }
 }
