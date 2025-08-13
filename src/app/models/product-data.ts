@@ -35,6 +35,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     price: 3.49,
     category: 'single',
     imageUrl: 'assets/images/rose-no-stem.jpg',
+    isFeatured: true,
     variants: [
       { color: 'Lavender', hexCode: '#CE93D8', inStock: true, imageUrl: 'assets/images/rose-lavender.jpg' },
       { color: 'Peach', hexCode: '#F8BBD0', inStock: true, imageUrl: 'assets/images/rose-peach.jpg' }

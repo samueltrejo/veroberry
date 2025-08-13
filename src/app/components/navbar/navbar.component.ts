@@ -7,23 +7,25 @@ import { RouterModule } from '@angular/router';
   imports: [RouterModule],
   template: `
     <header class="container">
-      <div class="navbar px-5 py-3">
-        <div class="logo" routerLink="/" routerLinkActive="active">
-          <img src="assets/veroberry.svg" />
-          <div>veroberry</div>
+      <div class="row">
+        <div class="navbar px-5 py-3">
+          <div class="logo" routerLink="/" routerLinkActive="active">
+            <!-- <img src="assets/veroberry2.svg" /> -->
+            <div>veroberry</div>
+          </div>
+  
+          <button class="menu-toggle d-md-none" (click)="toggleMenu($event)">
+            ☰
+          </button>
+  
+          <nav class="nav-links" [class.show]="showMenu">
+            <a routerLink="/" routerLinkActive="active" (click)="closeMenu()">home</a>
+            <a routerLink="/shop" routerLinkActive="active" (click)="closeMenu()">shop</a>
+            <a routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">contact</a>
+            <a routerLink="/cart" routerLinkActive="active" (click)="closeMenu()">cart</a>
+            <a routerLink="/profile" routerLinkActive="active" (click)="closeMenu()">profile</a>
+          </nav>
         </div>
-
-        <button class="menu-toggle d-md-none" (click)="toggleMenu($event)">
-          ☰
-        </button>
-
-        <nav class="nav-links" [class.show]="showMenu">
-          <a routerLink="/" routerLinkActive="active" (click)="closeMenu()">home</a>
-          <a routerLink="/shop" routerLinkActive="active" (click)="closeMenu()">shop</a>
-          <a routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">contact</a>
-          <a routerLink="/cart" routerLinkActive="active" (click)="closeMenu()">cart</a>
-          <a routerLink="/profile" routerLinkActive="active" (click)="closeMenu()">profile</a>
-        </nav>
       </div>
     </header>
   `,
